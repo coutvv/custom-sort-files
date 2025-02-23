@@ -22,6 +22,8 @@
         <treeStructureProvider 
                 implementation="com.lomovtsev.customsortfiles.ZFirstTreeStructureProvider"/>
 <!--        <sorter implementation="ZFirstSorter"/>-->
+        
+        <projectViewPane implementation="com.lomovtsev.customsortfiles.ZFirstProjectViewPane"/>
     </extensions>
     <actions>
         <action id="ForceZFirstAction" class="com.lomovtsev.customsortfiles.ForceZFirstAction" 

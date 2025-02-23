@@ -23,7 +23,8 @@ class ZFirstTreeStructureProvider : TreeStructureProvider {
         children.filter { it != zFirst }
             .forEach { result.add(it) }
 
-
+        children.clear()
+        children.addAll(result)
 
         return result
     }
