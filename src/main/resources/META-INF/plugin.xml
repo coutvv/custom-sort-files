@@ -4,15 +4,14 @@
     <id>com.lomovtsev.custom-sort-files</id>
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Custom-sort-files</name>
+    <name>Custom Sort Files</name>
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="coutvv@gmail.com" url="https://www.lomovtsev.com">lomovtsev.com</vendor>
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Ну тип плагинок, который способен менять сортировку файлов
   ]]></description>
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -20,5 +19,15 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <treeStructureProvider 
+                implementation="com.lomovtsev.customsortfiles.ZFirstTreeStructureProvider"/>
+<!--        <sorter implementation="ZFirstSorter"/>-->
     </extensions>
+    <actions>
+        <action id="ForceZFirstAction" class="com.lomovtsev.customsortfiles.ForceZFirstAction" 
+                text="Force ZFirst Sort" 
+                description="Apply custom sorting">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
