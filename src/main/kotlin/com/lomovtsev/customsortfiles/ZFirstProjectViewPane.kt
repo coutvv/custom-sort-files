@@ -4,9 +4,12 @@ import com.intellij.ide.SelectInTarget
 import com.intellij.ide.impl.ProjectViewSelectInPaneTarget
 import com.intellij.ide.projectView.impl.ProjectAbstractTreeStructureBase
 import com.intellij.ide.projectView.impl.ProjectViewPane
+import com.intellij.ide.projectView.impl.ProjectViewTree
 import com.intellij.ide.util.treeView.NodeDescriptor
+import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
+import javax.swing.tree.DefaultTreeModel
 
 class ZFirstProjectViewPane(project: Project): ProjectViewPane(project) {
     companion object {
@@ -25,13 +28,15 @@ class ZFirstProjectViewPane(project: Project): ProjectViewPane(project) {
         return ZFirstTreeStructure(this, myProject)
     }
 
-    override fun installComparator() {
-        installComparator(createComparator())
+    override fun addToolbarActions(actionGroup: DefaultActionGroup) {
+        super.addToolbarActions(actionGroup)
     }
-    
 
-    override fun createComparator(): Comparator<NodeDescriptor<*>?> {
-        return readmeLastComparator()
+    override fun createComparator(): Comparator<NodeDescriptor<*>> {
+        val defaultComparator = super.createComparator()
+//        return defaultComparator
+        return java.util.Comparator {o1, o2 -> 0}
+//        return ReadmeLastComparator(defaultComparator);
     }
     
 
@@ -39,6 +44,11 @@ class ZFirstProjectViewPane(project: Project): ProjectViewPane(project) {
         
         super.installComparator(comparator)
     }
+
+    override fun createTree(treeModel: DefaultTreeModel): ProjectViewTree {
+        return super.createTree(treeModel)
+    }
+    
 
     override fun createSelectInTarget(): SelectInTarget {
         return ProjectViewSelectInPaneTarget(myProject, this, false)

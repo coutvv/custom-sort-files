@@ -2,11 +2,11 @@ package com.lomovtsev.customsortfiles
 
 import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
+import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData
 import com.intellij.ide.util.treeView.smartTree.Sorter
 import com.intellij.ide.util.treeView.smartTree.SorterUtil
-import com.intellij.openapi.vcs.update.AbstractTreeNode
 
 /**
  * TODO: not worked path, remove it!
@@ -24,7 +24,7 @@ class ZFirstSorter: Sorter {
         return "Z First Sort"
     }
 
-    override fun getComparator(): Comparator<AbstractTreeNode> {
+    override fun getComparator(): Comparator<AbstractTreeNode<*>> {
         return Comparator { n1, n2 ->
             if (isZFirst(n1)) {
                 -1
@@ -42,7 +42,7 @@ class ZFirstSorter: Sorter {
         return true
     }
     
-    private fun isZFirst(node: AbstractTreeNode): Boolean {
+    private fun isZFirst(node: AbstractTreeNode<*>): Boolean {
         if (node is PsiFileNode) {
             return "zfirst.txt" == node.value.name
         }

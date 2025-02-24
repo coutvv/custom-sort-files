@@ -28,7 +28,7 @@ class ZFirstTreeStructure(
 
     override fun getProviders(): List<TreeStructureProvider> {
         return listOf(
-            ZFirstTreeStructureProvider()
+            ZFirstTreeStructureProvider(myProject)
         )
     }
 
