@@ -9,9 +9,10 @@ import com.intellij.ide.util.treeView.NodeDescriptor
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
+import java.util.Comparator
 import javax.swing.tree.DefaultTreeModel
 
-class ZFirstProjectViewPane(project: Project): ProjectViewPane(project) {
+class ZFirstProjectViewPane(project: Project) : ProjectViewPane(project) {
     companion object {
         const val ID = "ZFirstProjectView"
     }
@@ -24,53 +25,35 @@ class ZFirstProjectViewPane(project: Project): ProjectViewPane(project) {
     override fun getId(): String = ID
     override fun getWeight(): Int = 50
 
-    override fun createStructure(): ProjectAbstractTreeStructureBase {
-        return ZFirstTreeStructure(this, myProject)
-    }
-
-    override fun addToolbarActions(actionGroup: DefaultActionGroup) {
-        super.addToolbarActions(actionGroup)
-    }
-
     override fun createComparator(): Comparator<NodeDescriptor<*>> {
-        val defaultComparator = super.createComparator()
-//        return defaultComparator
-        return java.util.Comparator {o1, o2 -> 0}
-//        return ReadmeLastComparator(defaultComparator);
-    }
-    
-
-    override fun installComparator(comparator: java.util.Comparator<in NodeDescriptor<*>>) {
-        
-        super.installComparator(comparator)
+        return Comparator { _, _ -> 0 }
     }
 
-    override fun createTree(treeModel: DefaultTreeModel): ProjectViewTree {
-        return super.createTree(treeModel)
-    }
-    
-
-    override fun createSelectInTarget(): SelectInTarget {
-        return ProjectViewSelectInPaneTarget(myProject, this, false)
-    }
-    
     private fun readmeLastComparator(): Comparator<NodeDescriptor<*>?> {
         val comparator = super.createComparator();
         return Comparator { o1, o2 ->
             logger.warn("sorting comparator for $o1 and $o2")
-            if (o1.toString() == filename) { return@Comparator 1 }
-            if (o2.toString() == filename) { return@Comparator -1 }
+            if (o1.toString() == filename) {
+                return@Comparator 1
+            }
+            if (o2.toString() == filename) {
+                return@Comparator -1
+            }
             return@Comparator comparator.compare(o1, o2)
         }
     }
-    
-     
+
+
     private fun zFirstComparator(): Comparator<NodeDescriptor<*>?> {
         val comparator = super.createComparator();
         return Comparator { o1, o2 ->
             logger.warn("sorting comparator for $o1 and $o2")
-            if (o1.toString() == "zfirst.txt") { return@Comparator -1 }
-            if (o2.toString() == "zfirst.txt") { return@Comparator 1 }
+            if (o1.toString() == "zfirst.txt") {
+                return@Comparator -1
+            }
+            if (o2.toString() == "zfirst.txt") {
+                return@Comparator 1
+            }
             return@Comparator comparator.compare(o1, o2)
         }
     }
