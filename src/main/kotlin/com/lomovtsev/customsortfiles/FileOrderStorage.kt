@@ -15,7 +15,8 @@ import com.intellij.openapi.project.Project
 class FileOrderStorage(
     private var state: State = State(mutableMapOf(
         "zfirst.txt" to 1,
-        "README.md" to 0, // TODO: think about last index as -1
+        "README.md" to -1,
+        "r2.json" to -2,
     ))
 ) : PersistentStateComponent<FileOrderStorage.State> {
     companion object {

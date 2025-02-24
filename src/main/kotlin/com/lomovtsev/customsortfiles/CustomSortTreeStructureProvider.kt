@@ -11,39 +11,48 @@ import com.intellij.openapi.project.Project
 class CustomSortTreeStructureProvider(
     project: Project
 ) : TreeStructureProvider {
-    val fileOrderStorage =  FileOrderStorage.getInstance(project)
-    
+    val fileOrderStorage = FileOrderStorage.getInstance(project)
+
     val comparatorV2 = CustomGroupByTypeComparator()
     override fun modify(
         parent: AbstractTreeNode<*>,
         children: MutableCollection<AbstractTreeNode<*>>,
         settings: ViewSettings?
     ): MutableCollection<AbstractTreeNode<*>> {
-        
+
         val customPositions = fileOrderStorage.state.customFilePositions
-        
+
         val customs = findCustom(children, customPositions)
 
         val result = children
             .filter { !customs.contains(it) }
             .sortedWith(comparatorV2)
             .toMutableList()
-        
+
+        var lastItems = mutableListOf<AbstractTreeNode<*>>()
+
         customs.forEach {
             val name = it.filename()
             val index = customPositions[name]!!
-            result.add(index, it)
+            if (index < 0) {
+                lastItems.add(it)
+            } else {
+                result.add(index, it)
+            }
         }
+
+        lastItems.sortedBy { customPositions[it.filename()] }
+            .forEach { result.add(it) }
 
         return result
     }
-    
+
     private fun findCustom(
-        children: Collection<AbstractTreeNode<*>>, 
+        children: Collection<AbstractTreeNode<*>>,
         customPositions: Map<String, Int>
     ): LinkedSet<AbstractTreeNode<*>> {
         return children.filter { it is PsiFileNode && customPositions.containsKey(it.value.name) }
-            .map {  it as PsiFileNode }
+            .map { it as PsiFileNode }
             .sortedBy { customPositions[it.value.name] }
             .toLinkedSet()
     }
@@ -51,7 +60,7 @@ class CustomSortTreeStructureProvider(
 }
 
 private fun AbstractTreeNode<*>.filename(): String? {
-    if  (this is PsiFileNode) {
+    if (this is PsiFileNode) {
         return this.value.name
     }
     return null;
