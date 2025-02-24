@@ -4,7 +4,7 @@ import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.ide.util.treeView.NodeDescriptor
 import com.intellij.openapi.project.Project
 
-class ZFirstProjectViewPane(project: Project) : ProjectViewPane(project) {
+class CustomSortProjectViewPane(project: Project) : ProjectViewPane(project) {
     companion object {
         const val ID = "ZFirstProjectView"
     }

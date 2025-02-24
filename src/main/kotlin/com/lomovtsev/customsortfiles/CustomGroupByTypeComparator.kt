@@ -25,17 +25,9 @@ class CustomGroupByTypeComparator: Comparator<AbstractTreeNode<*>> {
     fun getName(node: AbstractTreeNode<*>?): String? {
         return when (node) {
             null -> null
-            is PsiFileNode -> {
-                node.value.name
-            }
-
-            is PsiDirectoryNode -> {
-                node.value.name
-            }
-
-            else -> {
-                null
-            }
+            is PsiFileNode -> node.value.name
+            is PsiDirectoryNode -> node.value.name
+            else -> null
         }
     }
 }

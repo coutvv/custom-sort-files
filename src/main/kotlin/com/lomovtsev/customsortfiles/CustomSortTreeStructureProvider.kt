@@ -6,7 +6,7 @@ import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 
-class ZFirstTreeStructureProvider(
+class CustomSortTreeStructureProvider(
     private val project: Project
 ) : TreeStructureProvider {
     val comparatorV2 = CustomGroupByTypeComparator()

@@ -12,12 +12,12 @@
     
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider 
-                implementation="com.lomovtsev.customsortfiles.ZFirstTreeStructureProvider"/>
+                implementation="com.lomovtsev.customsortfiles.CustomSortTreeStructureProvider"/>
         
-        <projectViewPane implementation="com.lomovtsev.customsortfiles.ZFirstProjectViewPane"/>
+        <projectViewPane implementation="com.lomovtsev.customsortfiles.CustomSortProjectViewPane"/>
     </extensions>
     <actions>
-        <action id="ForceZFirstAction" class="com.lomovtsev.customsortfiles.ForceZFirstAction" 
+        <action id="ForceZFirstAction" class="com.lomovtsev.customsortfiles.UpdateTreeAction" 
                 text="Force ZFirst Sort" 
                 description="Apply custom sorting">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
