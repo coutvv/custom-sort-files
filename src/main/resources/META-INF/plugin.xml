@@ -1,27 +1,18 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.lomovtsev.custom-sort-files</id>
-    <!-- Public plugin name should be written in Title Case.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>Custom Sort Files</name>
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+
     <vendor email="coutvv@gmail.com" url="https://www.lomovtsev.com">lomovtsev.com</vendor>
-    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    
     <description><![CDATA[
-    Ну тип плагинок, который способен менять сортировку файлов
+    Plugin for setup custom order in the Project Files window
   ]]></description>
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    
     <depends>com.intellij.modules.platform</depends>
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider 
                 implementation="com.lomovtsev.customsortfiles.ZFirstTreeStructureProvider"/>
-<!--        <sorter implementation="ZFirstSorter"/>-->
         
         <projectViewPane implementation="com.lomovtsev.customsortfiles.ZFirstProjectViewPane"/>
     </extensions>
