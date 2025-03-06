@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.lomovtsev"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
@@ -32,7 +32,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("241")
-        untilBuild.set("243.*")
+        untilBuild.set("253.*")
     }
 
     signPlugin {
